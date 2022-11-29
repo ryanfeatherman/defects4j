@@ -102,6 +102,11 @@ for bid in $(echo $BUGS); do
     for v in "b" "f"; do
         vid=${bid}$v
         defects4j checkout -p $PID -v "$vid" -w "$work_dir" || die "checkout: $PID-$vid"
+        sed -i '' "s/1.1/1.6/" $work_dir/default.properties
+        sed -i '' "s/1.2/1.6/" $work_dir/default.properties
+        sed -i '' "s/1.3/1.6/" $work_dir/default.properties
+        sed -i '' "s/1.4/1.6/" $work_dir/default.properties
+        sed -i '' "s/1.5/1.6/" $work_dir/default.properties
         defects4j compile -w "$work_dir" || die "compile: $PID-$vid"
         defects4j test $TEST_FLAG -w "$work_dir" || die "run relevant tests: $PID-$vid"
 
